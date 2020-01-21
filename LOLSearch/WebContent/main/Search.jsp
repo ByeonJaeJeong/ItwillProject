@@ -2,6 +2,20 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<style>
+#Ex{
+background-image: url('//cdn.lolalytics.com/image/generated/tiled/emblems.png');
+	background-size: 576px 64px; */
+    display: inline-block;
+    width: 64px;
+    height: 64px;
+    background-position-x:64px;
+}
+.tierImg{
+	width:100px;
+	height:100px;
+}
+</style>
 <head>
 <script
   src="https://code.jquery.com/jquery-3.4.1.js"
@@ -36,20 +50,38 @@ $.ajax({
 	 		$("#revisionDate").html(json.revisionDate);
 	 		$("#summonerLevel").html("소환사 레벨:"+json.summonerLevel);
 	 		$.ajax({
-	 		    url:riot+"/lol/league/v4/entries/by-summoner/"+id+"?api_key="+api_key,
+	 		    url:riot+"/lol/league/v4/entries/by-summoner/"+json.id+"?api_key="+api_key,
 	 		 	type:"GET",
 	 		 	dataType:"json",
 	 		    success: function(json) {
 	 		    	/*  $('#tier').html("<img src='../WebContent/img/tier-img/"+json[0].tier+".png'>"); */ 
 	 		    //	$("#tier").html("tier:"+json[0].tier);
 	 		    	//$("#tier").html("<img src='WebContent/img/tier-img/GRANDMASTER.png'>");
-	 		    	
+	 		    	setTimeout(5);
 	 		    }
-	 		});
+	 		});//소환사 티어 전적
+	 		$.ajax({
+	 			url:riot+"/lol/match/v4/matchlists/by-account/"+json.accountId+"?endIndex=15&api_key="+api_key,
+	 			type:"GET",
+	 		 	dataType:"json",
+	 		 	success:function(json){
+	 		 		$('#Ex').html(json.matches[0].gameId);
+	 		 		for(var i=0;i<json.matches.length;i++){
+	 		 			$.ajax({
+	 		 				url:riot+"/lol/match/v4/matches/"+json.matches[i].gameId+"?api_key="+api_key,
+	 			 			type:"GET",
+	 			 		 	dataType:"json",
+	 			 		 	
+	 		 				
+	 		 			});//게임상세
+	 		 			
+	 		 		}//for문 끝 
+	 		 	}
+	 			
+	 		});//전적20게임
 	    }
-});
-$('#Ex').html("<img src='../WebContent/img/tier-img/GRANDMASTER.png'>");
-$('#Ex').html("<img src='../WebContent/img/bg.jpg'>");
+});//소환사 검색
+
 </script>
 <jsp:include page="../inc/header.jsp"/>
 <div id="print">
@@ -61,7 +93,7 @@ $('#Ex').html("<img src='../WebContent/img/bg.jpg'>");
 <div id="revisionDate"></div>
 <div id="summonerLevel"></div>
 <div id="tier"></div>
-<div id="Ex"></div>
+<div id="Ex"><img class="tierImg" src="../img/MASTER.png"></div>
 </div>
 
 <jsp:include page="../inc/footer.jsp"/>
