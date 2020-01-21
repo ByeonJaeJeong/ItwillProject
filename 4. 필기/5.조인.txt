@@ -1,0 +1,63 @@
+<조인유형>
+		Natural		Using		On
+--------------------------------------------------------------------
+컬럼명		=		=		상관없음
+데이터타입		=		상관없음		상관없음
+조인문법		from departments natural join locations
+		(=)
+		from departments join locations using(location_id)
+		(=)
+		from departments join locations 
+		on departments.location_id = locations.location_id
+--------------------------------------------------------------------
+ equi join		vs 	non-equi join
+-조인조건에 동등연산자(=)가		-조인조건에 동등연산자가 아닌  
+ 포함된 조인 유형			 그 외 비교연산자를 포함한 조인 유형
+-naturl join			-on(=이 아닌 비교연산자) join
+ using join
+ on(=) join
+
+---------------------------------------------------------------------
+ inner join		vs	outer join
+-내부조인				-외부조인
+-조인조건을 만족하는 행만		-조인조건을 만족하지 않는 행까지
+ 반환하는 조인 유형			 반환하는 조인 유형
+-natural join			-left outer join
+ using join			 right outer join
+ on join			 full outer join
+
+---------------------------------------------------------------------
+[p22 연습문제 답]
+1.
+SELECT e.employee_id, e.last_name, e.salary,
+       d.department_id, d.department_name
+FROM employees e join departments d
+on e.department_id = d.department_id;
+(=)
+SELECT e.employee_id, e.last_name, e.salary,
+       department_id, d.department_name
+FROM employees e join departments d using(department_id);
+
+2.
+SELECT w.last_name "Employee", w.employee_id "EMP#",                           m.last_name "Manager", m.employee_id  "Mgr#" 
+FROM   employees w join employees m 
+ON     (w.manager_id = m.employee_id);
+(=)
+SELECT w.last_name "Employee", w.employee_id "EMP#",                           m.last_name "Manager", w.manager_id  "Mgr#" 
+FROM   employees w join employees m 
+ON     (w.manager_id = m.employee_id);
+
+(X)
+SELECT w.last_name "Employee", w.employee_id "EMP#",                           m.last_name "Manager", m.manager_id  "Mgr#" 
+FROM   employees w join employees m 
+ON     (w.manager_id = m.employee_id);
+--------------------------------------------------------------
+
+(예제) employees 테이블을 사용하여 last_name, hire_date, 
+매니저 last_name, 매니저 hire_date를 출력하되 매니저보다 
+먼저 입사한 사원만 출력하는 구문을 작성하시오.
+
+select w.last_name, w.hire_date, m.last_name, m.hire_date
+from employees w join employees m
+on employee_id
+where w.hire_date < m.hire_date;

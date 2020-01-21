@@ -1,0 +1,23 @@
+<DB Object>
+1. Table => 권한명 : create table 시스템 권한
+-사용방법(DML) : select, insert, update, delete
+-정의방법(DDL) : create table, alter table, drop table, truncate table
+
+2. View => 권한명 : create view 시스템 권한
+-사용방법 : select, insert, update, delete
+-정의방법 : create [or replace] view, drop view
+
+3. Sequence => 권한명 : create sequence 시스템 권한
+-사용방법 : 시퀀스명.nextval, 시퀀스명.currval
+-정의방법 : create sequence, alter sequence, drop sequence
+
+4. Index => 권한명 : create table 시스템 권한
+-사용방법 : X
+-정의방법 : create index, alter index, drop index
+
+5. Synonym => 권한명 : create synonym 시스템 권한
+-사용방법 : X
+-정의방법 : create synonym, drop synonym
+
+
+

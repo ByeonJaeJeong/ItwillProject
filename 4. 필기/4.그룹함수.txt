@@ -1,0 +1,44 @@
+<Count 함수>
+1. count(*) : null O, 중복값 O
+(ex) select count(*)
+     from employees
+     where department_id = 80;  
+     => 3 (80번 부서에 소속된 사원의 수)
+
+2. count(expr) : null X, 중복값 O
+(ex) select count(commission_pct)
+     from employees
+     where department_id = 80;
+     => 1 (80번 부서에 소속된 사원 중 커미션을 받는 사원의 수)
+
+3. count(distinct expr) : null X, 중복값 X
+(ex) select count(distinct department_id)
+     from employees; 
+     => 2 (사원들이 소속된 부서의 수)
+--------------------------------------------------------
+(예제) employees 테이블에서 전 사원의 커미션 평균을 구하는 쿼리구문을
+      작성하시오.
+(잘못된 답)
+SQL> select avg(commission_pct)
+     from employees; 
+=> 커미션을 받는 사원들의 커미션 평균
+(정답)
+SQL> select avg(nvl(commission_pct,0)) as avg_comm
+     from employees; 
+=> 전체 사원들의 커미션 평균
+
+(4장 연습문제)
+1.
+select job_id, max(salary) as "Maximum", 
+       min(salary) as "Minimum", sum(salary) as "Sum",
+       avg(salary) as "Average"
+from employees
+group by job_id;
+
+2.
+select manager_id, min(salary)
+from employees
+where manager_id is not null
+group by manager_id
+having min(salary) >= 6000
+order by min(salary) desc;

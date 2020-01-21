@@ -1,0 +1,68 @@
+<단일행 함수>
+1.문자함수 1)대소문자 변환 함수 : lower, upper, initcap
+	 2)문자 조작 함수 : concat, substr, length, instr
+			 lpad, rpad, replace, trim
+2.숫자함수 : round, trunc, mod
+3.날짜함수 : sysdate, months_between, add_months, next_day,
+           last_day, round, tunc
+4.변환함수 : to_char, to_date, to_number
+5.일반함수 : nvl, nvl2, nullif, coalesce
+---------------------------------------------------------
+<문자 조작 함수>
+1.concat(expr1, expr2)
+-두 인수를 연결해서 하나의 문자열로 반환해 주는 함수
+(ex1) select concat(first_name, last_name) as name
+      from employees;
+      (=)
+(ex2) select first_name || last_name as name
+      from employees;
+
+2.substr(expr1, expr2, expr3)
+-문자열의 일부분을 반환해 주는 함수
+-expr1 : 반환할 문자열
+-expr2 : 시작위치 => 음수 : 시작위치를 뒤에서 부터 찾아옴
+-expr3 : 반환할 문자수 => 생략가능 : 시작위치에서 끝까지 반환함
+(ex1) substr(주민번호, 1, 6) => 901226
+(ex2) substr('Kochhar', -3, 2) => ha
+
+3.length(expr1)
+-문자열의 길이를 반환해 주는 함수
+
+4.instr(expr1, expr2)
+-문자열(expr1)로 부터 특정 문자(expr2)의 첫번째 위치값을 반환해 주는 함수
+(ex) instr('HelloWorld', 'o') => 5
+
+5.lpad(expr1, expr2, expr3) / rpad(expr1, expr2, expr3)
+-오른쪽 정렬/왼쪽 정렬을 해주는 함수
+-expr1 : 반환할 문자열
+-expr2 : 전체자리수
+-expr3 : 남는 공간을 채울 문자
+
+6.replace(expr1, expr2, expr3)
+-문자열(expr1)로 부터 특정 문자(expr2)를 다른 문자(expr3)로 교체해 주는 함수
+
+7.trim(expr1 from expr2)
+-문자열(expr2)로 부터 특정 문자(expr1)가 접두어/접미어에 있는 경우 삭제해 주는 함수
+(ex) trim('H' from 'HHelloHHWorHldHHH')
+
+--------------------------------------------------------
+(3장 연습문제)
+
+1. 
+SELECT  employee_id, last_name, salary,                            ROUND(salary * 1.155, 0) "New Salary",                     ROUND(salary * 1.155, 0) - salary "Increase"      FROM  employees;
+
+2. 
+SELECT last_name, LPAD(salary, 15, '$') SALARY 
+FROM employees; 
+
+3. 
+SELECT  last_name || ' earns ' || 
+        TO_CHAR(salary, 'fm$99,999.00') || 
+        ' monthly but wants ' || 
+        TO_CHAR(salary * 3, 'fm$99,999.00') || '.' 
+        as "Dream Salaries" 
+FROM employees;
+
+4. 
+SELECT last_name, 
+       NVL(TO_CHAR(commission_pct), 'No Commission') COMM FROM employees; 

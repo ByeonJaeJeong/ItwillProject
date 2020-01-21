@@ -1,0 +1,18 @@
+<Linux OS User>
+-root(pw : oracle01) : 관리자 권한
+-oracle(pw : oracle) : /home/oracle 디렉토리 권한
+		 /u01/app/oracle 디렉토리 권한
+
+<ORCL DB User>
+-sys(pw : oracle) : sysdba 권한(dba + DB생성 + DB시작/종료)
+ SQL> conn  /as  sysdba
+ SQL> conn sys/oracle  as  sysdba
+ SQL> connect  sys/oracle@IP주소  as  sysdba
+
+-system(pw : oracle) : dba 권한
+ SQL> conn system/oracle
+ SQL> conn system/oracle@IP주소
+
+-hr(pw : hr) : Object 관리 권한
+ SQL> conn hr/hr
+ SQL> conn hr/hr@IP주소

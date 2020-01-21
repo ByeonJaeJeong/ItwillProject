@@ -1,0 +1,41 @@
+<제약조건 선언 시기>
+-테이블 생성 시 : create table ---;
+-테이블 생성 후 : alter table ---;
+
+<제약조건 유형>
+-pk, fk, uk, ck, nn
+
+<제약조건 이름(=제약조건명)>
+-사용자 지정 : 사용자 의미있고 고유한 이름 부여
+	     권장 => 테이블약자_컬럼약자_제약조건유형약자
+		    dept_deptid_pk
+		    emp_lname_nn
+		    emp_email_uk
+		    emp_sal_ck
+		    emp_did_fk
+-사용자 생략 : 오라클이 고유한 이름 부여(sys_cxxxxx)
+
+<Check 제약조건>
+salary number(10),
+constraint XXX check (salary > 0),
+(==)
+salary number(10) constraint XXX check (salary > 0),
+
+성별 varchar2(10) constraint xxx check (성별 in ('남','여')),
+주민번호 varchar2(20) 
+       constraint xxx check (length(주민번호) = 13),
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
