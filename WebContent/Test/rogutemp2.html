@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+	<script type="text/javascript">
+	var lifeParam = 3;
+
+	var Index;
+	
+	var wh = [5,5];
+	alert(lifeParam);
+	var arr = ['w','s','a','d'];
+	document.write("<form name='fr'>");
+	document.write("<table id='tradio' name='tradio' border='1'>");
+	for(var j = 0; j<wh[1]; j++){
+		document.write("<tr name="+i+">");
+		for(var i = 0; i<wh[0]; i++){
+			document.write("<td bgcolor='"+natblock()+"'><input type='radio' id='" + i + j +  "' name='a' onselect='chage1();'></td>");
+		}
+		document.write("</tr>");
+	}
+	document.write("</table>");
+	document.write("y축<input type='text' name='yval' size='3'> ");
+	document.write("x축<input type='text' name='xval' size='3'>");
+	document.write("</form>");
+	var x = document.getElementsByTagName("table")[0]//X
+	document.write(x.rows[0].cells[0].getAttribute("bgcolor"));
+	var Cstartx= Math.abs(Math.floor(Math.random()*5));
+	var Cstarty= Math.abs(Math.floor(Math.random()*5));
+	var chedot= Math.abs(Math.floor(Math.random()*25));
+	var cash = chedot;
+	var k=cash%5;
+	var l=cash/5;
+	var s =
+	document.getElementsByTagName("td")[cash].getAttribute("bgcolor");
+	document.write(s);
+	var lifeParams=function(){
+		alert("작동");
+		if(this.lifeParam>3){
+			this.lifeParam=3;
+		}else if(this.lifeParam==0){
+			alert("Game over");
+			//location_reload;
+		}
+		for(var i=1; i<=lifeParam; i++){
+			//document.write("<img src='life.png' readonly>");
+		}return;
+	}
+	function func1(){
+		alert(lifeParam);
+		var txt = document.getElementById("key").value;
+	
+		switch(txt[0]){
+		case 'w':if(Number(document.fr.yval.value)<1){
+			document.getElementById("key").value = "";
+			return;
+		}else{
+			document.fr.yval.value = Number(document.fr.yval.value) - 1;
+			document.fr.a[Number(document.fr.yval.value)*wh[0]+Number(document.fr.xval.value)].checked = true;
+			document.getElementById("key").value = "";
+			document.getElementsByTagName("td")[cash].setAttribute("bgcolor","white");
+			cash-=5;
+			eBlock(document.getElementsByTagName("td")[cash].getAttribute("bgcolor"));
+			document.getElementsByTagName("td")[cash].setAttribute("bgcolor","pink");
+		}
+		break;
+		case 'a':if(Number(document.fr.xval.value)<1){
+			document.getElementById("key").value = "";
+			return;
+		}else{
+			document.fr.xval.value = Number(document.fr.xval.value) - 1;
+			document.fr.a[Number(document.fr.yval.value)*wh[0]+Number(document.fr.xval.value)].checked = true;
+			document.getElementById("key").value = "";
+			document.getElementsByTagName("td")[cash].setAttribute("bgcolor","white");
+			cash--;
+			eBlock(document.getElementsByTagName("td")[cash].getAttribute("bgcolor"));
+			document.getElementsByTagName("td")[cash].setAttribute("bgcolor","pink");
+		}
+		break;
+		case 's':if(Number(document.fr.yval.value)>wh[1]-2){
+			document.getElementById("key").value = "";
+			return;
+		}else{
+			document.fr.yval.value = Number(document.fr.yval.value) + 1;
+			document.fr.a[Number(document.fr.yval.value)*wh[0]+Number(document.fr.xval.value)].checked = true;
+			document.getElementById("key").value = "";
+			document.getElementsByTagName("td")[cash].setAttribute("bgcolor","white");
+			cash+=5;
+			eBlock(document.getElementsByTagName("td")[cash].getAttribute("bgcolor"));
+			document.getElementsByTagName("td")[cash].setAttribute("bgcolor","pink");
+		}
+		break;
+		case 'd':if(Number(document.fr.xval.value)>wh[0]-2){
+			document.getElementById("key").value = "";
+			return;
+		}else{
+			document.fr.xval.value = Number(document.fr.xval.value) + 1;
+			document.fr.a[Number(document.fr.yval.value)*wh[0]+Number(document.fr.xval.value)].checked = true;
+			document.getElementById("key").value = "";
+			document.getElementsByTagName("td")[cash].setAttribute("bgcolor","white");
+			cash++;
+			eBlock(document.getElementsByTagName("td")[cash].getAttribute("bgcolor"));
+			document.getElementsByTagName("td")[cash].setAttribute("bgcolor","pink");
+		}
+		break;
+		default:document.getElementById("key").value = "";
+		}
+	}
+	function eBlock(clr){
+		var evnt=(Math.abs(Math.floor(Math.random()*100)));
+			
+		if(clr=="red"){
+			if(evnt<10){
+				alert("기습에 성공했습니다!\n 손쉬운 전투로 충분한 휴식을 가졌습니다.");
+				lifeparams;
+				return;
+			}else if(evnt<20){
+				alert("고된 전투였습니다.\n 라이프--, 라이프--");
+				lifeParam-=2;
+				lifeparams;
+				return;
+			}else{
+				alert("전투가 끝났습니다.\n 라이프--");
+				lifeParam--;
+				lifeparams;
+				return;
+			}
+		}
+		if(clr=="green"){
+			if(evnt<10){
+				alert("불안감이 엄습하여 휴식을 취할수가 없습니다.");
+				lifeparams;
+				return;
+			}else if(evnt<20){
+				alert("휴식은 언제나 달콤한 법! \n 라이프++, 라이프++");
+				lifeParam+=2;
+				lifeparams;
+				return;
+			}else{
+				alert("대ㅡ충 쉴수 있었습니다.\n 라이프++");
+				lifeParam++;
+				lifeparams;
+				return;
+			}
+		}
+		if(clr=="blue"){
+			if(evnt<10){
+				alert("풍랑을 만나 배가 뒤집힙니다.\n 라이프--,라이프--,라이프--");
+				lifeParam-=3;
+				lifeparams;
+				
+				return;
+			}else if(evnt<20){
+				alert("장기간 운항으로 역병이 돕니다.\n 라이프--, 라이프--");
+				lifeParam-=2;
+				lifeparams;
+				return;
+			}else{
+				alert("보물섬.\n하지만 지금은 효과가 없다.");
+				lifeparams;
+				return;
+			}
+		}
+		if(clr=="purple"){
+			if(evnt<10){
+				alert("성소는 성스러운 곳입니다.\n 라이프++,라이프++,라이프++");
+				lifeParam+=3;
+				lifeparams;
+				return;
+			}else if(evnt<20){
+				alert("신도와 싸웠습니다.\n 라이프--");
+				lifeParam--;
+				lifeparams;
+				return;
+			}else{
+				alert("기도를 드립니다(미지원)");
+				lifeparams;
+				return;
+			}
+		}
+		else{
+			lifeparams;
+			return;
+		}
+		
+	}
+	function start(){
+		for(var i = 1; i<wh[1]+1; i++){
+			for(var j = 0; j<wh[0]; j++){
+				
+				if(document.fr.a[(i-1)*wh[0]+j].checked == true){
+					document.fr.yval.value = i-1;
+					document.fr.xval.value = j;
+				}
+			}
+		}
+	}
+	function natblock(){
+		var nature = (Math.abs(Math.floor(Math.random()*10)+1));
+		if(nature==10){
+			var na='red';
+			
+			return na;
+		}
+		if(nature==9){
+			var na='purple';
+			return na;
+		}
+		if(nature==8){
+			var na='blue';
+			return na;
+		}
+		if(nature==7){
+			var na='green';
+			return na;
+		}
+		if(nature>=5){
+			var na='black';
+			return na;
+		}
+		if(nature>=0){
+			var na='white';
+			return na;
+		}
+		
+	}
+	for(var i=0;i<5;i++){
+		for(var j=0;j<5;j++){
+			var num=(i*5)+(j);
+			document.getElementsByTagName("td")[num].childNodes[0].value=
+				x.rows[i].cells[j].getAttribute("bgcolor");
+		}
+	}
+	document.write(document.getElementsByTagName("td")[cash].childNodes[0].value);
+	document.getElementsByTagName("td")[cash].childNodes[0].click();
+	var k=cash%5;
+	var l=cash/5;
+	document.getElementsByTagName("td")[cash].setAttribute("bgcolor","pink");
+	
+/* 	function change1(){
+ 		for(td 0~24까지 반복){
+			if(블록 색상 확인 == 흰색){
+			cnt++;
+			}
+		}
+ 		if(cnt>22){
+ 			var goal=(Math.abs(Math.floor(Math.random()*25)));
+ 			td[goal] 백그라운드 컬러 yellow
+ 		}
+ 	}
+*/
+
+
+function setLife(life){
+	this.lifeParam = life;
+}
+function fun10(){
+	alert("한글");
+	alert(lifeParam);
+}
+
+	</script>
+</head>
+<body>
+	<h1>roguelikeproto</h1>
+	<input type="button" value = "시작" onclick="start();" >
+	<input id="key" type="text" onkeyup="func1();">
+	<input type="button" value="버튼"onclick="func10();">
+	
+</body>
+</html>

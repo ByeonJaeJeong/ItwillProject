@@ -1,0 +1,10 @@
+<%
+	String col1="yellow";
+	String col2="pink";
+	String col3="green";
+	String col4="silver";
+	String col5="orange";
+
+
+
+%>
